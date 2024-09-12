@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from .models import Event
-from .forms import EventRegisterForm, EventFilterForm, EventForm
+from .models import Event, User, Tweet
+from .forms import EventRegisterForm, EventFilterForm, EventForm, TweetForm
+import json
+from django.contrib import messages
 
 def index(request):
 
@@ -86,3 +88,68 @@ def deleteEvent(request, id):
     }
 
     return render(request, 'assistant/eventDelete.html', params)
+
+@login_required(login_url="/admin/login/")
+def eventInfo(request, id):
+
+    event = Event.objects.get(id=id)
+    stores = event.stores.all()
+    tweets = event.tweets.all()
+
+    stores_data = [
+        {
+            'name': store.name,
+            'latitude': store.latitude,
+            'longitude': store.longitude,
+            'info_window_content': store.info_window_content
+        } for store in stores
+    ]
+
+    params = {
+
+        'title': 'Assistant/EventInfo',
+        'message' : 'event infomation',
+        'id' : id,
+        'obj' : event,
+        'stores': stores,
+        'tweets': tweets,
+        'stores_json': json.dumps(stores_data),  # JSON形式でデータを渡す
+    }
+
+    return render(request, 'assistant/eventInfo.html', params)
+
+
+@login_required(login_url="/admin/login/")
+def tweetPost(request, user_id, event_id):
+    
+    event = Event.objects.get(id=event_id)
+    user = User.objects.get(id=user_id)
+
+    params = {
+
+        'title' : 'Assistant/TweetPost',
+        'msg' : 'Try tweet to fill in flollowing form!',
+        'event_data' : event,
+        'user_data' : user,
+        'form': TweetForm(),
+    }
+
+    print("POST request received")
+    if(request.method == "POST"):
+        obj = Tweet(user=user, event=event, good_count=0)
+        tweet = TweetForm(request.POST, instance=obj)
+        tweet.save()
+        return redirect(to="/assistant/FeSNS/home/")
+
+
+    return render(request, 'assistant/tweetPost.html', params)
+
+
+def fesnsHome(request):
+
+    params = {
+
+        'title' : 'Assistant/FeSNS',
+    }
+
+    return render(request, 'assistant/FeSNS.html', params)

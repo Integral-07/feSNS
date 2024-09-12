@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+
+    <link rel="icon" href="data:,">
+</head>
+
+<body>
+    {{ title }}
+    <p>{{ msg }}</p>
+
+    <form action="{% url 'tweetPost' user_id=user_data.id event_id=event_data.id %}" method="post">
+
+        {% csrf_token %}
+            
+        {{ form }}
+        <input type="submit" value="Tweet!" class="btn btn-primary">
+
+    </form>
+
+</body>
+
+</html>

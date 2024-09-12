@@ -1,0 +1,211 @@
+*,
+::before,
+::after{
+
+    box-sizing:border-box;
+    border-style:solid;
+    border-width:0;
+    margin:0;
+}
+
+body{
+    font-family:"Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+    overflow-x: hidden;
+}
+
+ul{
+    padding:0;
+    list-style:none;
+}
+
+a{
+    background: transparent;
+    text-decoration: none;
+    color:inherit;
+}
+
+header.header01{
+
+    width:100%;
+    height:40vh;
+    background: url('../assets/img/fv.png') no-repeat;
+    background-size: cover;
+    position:relative;
+}
+
+.header01-container{
+
+    width:100%;
+    background-color: #fff;
+    padding:1rem;
+    position:absolute;
+    bottom: 0;
+    left: 0;
+}
+nav.nav{
+    
+    max-width: 660px;
+    margin:0 auto;
+}
+
+nav.nav ul.item{
+
+    display:flex;
+    align-items: center;
+}
+
+nav.nav ul.item li.list{
+
+    padding:0 1.5rem;
+}
+
+nav.nav ul.item li.list a{
+    font-weight: bold;
+}
+
+nav.nav ul.item li.logo{
+
+    margin:0 auto;
+    padding:0 2rem;
+}
+
+nav.nav ul.item li.logo img{
+
+    width: 80px;
+    height:30px;
+    object-fit: contain;
+}
+
+h1 {
+    position: relative;
+    color: #158b2b;
+    font-size: 30px;
+    padding: 10px 0;
+    text-align: center;
+    margin: 1.5em 0; 
+}
+h1:before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    width: 150px;
+    height: 75px;
+    border-radius: 50%;
+    border: 5px solid #a6ddb0;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.event-name {
+    position: relative;
+    background: #ffd98a;
+    padding: 2px 5px 2px 40px;
+    font-size: 20px;
+    color: #474747;
+    border-radius: 0 10px 10px 0;
+}
+
+.event-name:before {
+    font-family: "FontAwesome";
+    content: "\f041";
+    display: inline-block;
+    line-height: 40px;
+    position: absolute;
+    padding: 0em;
+    color: white;
+    background: #ffa337;
+    font-weight: 900;
+    width: 40px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    left: 0em;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    border: solid 3px white; 
+    border-radius: 50%;
+}
+
+/* フレックスボックスのコンテナ */
+.container {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;  /* ビューポート全体の高さを使用 */
+}
+
+/* 左側のGoogleマップエリア */
+.map-container {
+    width: 70%;  /* 70%をマップに割り当て */
+    padding: 10px;
+}
+
+/* タイムライン全体 */
+.timeline-container {
+    width: 30%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    overflow-y: auto; /* 縦方向のスクロールバーを追加 */
+}
+
+/* タイムラインの項目 */
+.timeline-item {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 投稿者名 */
+.timeline-item h3 {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* 投稿日時 */
+.timeline-item .date {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+/* 投稿内容 */
+.timeline-item p {
+    font-size: 1em;
+    color: #555;
+}
+
+.page-details {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    word-wrap: break-word;  /* 長い単語がある場合でも端で折り返す */
+    width: 100%;
+}
+
+/* 地図のサイズ */
+#map {
+    height: 100%;  /* コンテナ内でマップを全体に広げる */
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .map-container, .timeline-container {
+        width: 100%;
+    }
+}
+
+#menu-btn,.nav-hidden{
+
+    display: none;
+}

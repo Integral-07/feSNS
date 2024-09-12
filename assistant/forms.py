@@ -1,11 +1,11 @@
 from django import forms
-from .models import Event
+from .models import Event, Tweet
 
 class EventForm(forms.ModelForm):
 
     class Meta:
         model = Event
-        fields = ['name', 'location', 'date', 'summary']
+        fields = ['name', 'location', 'date', 'summary', 'details']
 
 class EventRegisterForm(forms.Form):
 
@@ -19,3 +19,12 @@ class EventFilterForm(forms.Form):
     name = forms.CharField(label="Event Name(completely match only)")
     location = forms.CharField(label="Location")
     date = forms.DateField(label="Date")
+
+class TweetForm(forms.ModelForm):
+
+    class Meta:
+        model = Tweet
+        fields = ['msg']
+        widgets = {
+            'msg': forms.Textarea(attrs={'rows': 4, 'cols': 40, 'placeholder': '投稿内容を入力してください'}),
+        }
