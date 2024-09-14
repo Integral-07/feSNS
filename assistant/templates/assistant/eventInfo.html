@@ -1,11 +1,5 @@
 {% extends 'assistant/base.html' %}
 
-        <!--ここからデバッグ
-        <h1 >{{title}}</h1>
-        <p>{{message|safe}}</p>
-        <tr><td>ID : {{obj.id}}</td></tr>
-        ここまでデバッグ-->
-
 {% block content %}
 
 <style>
@@ -21,12 +15,54 @@
         margin: 0;
         padding: 0;
     }
+
+/* タイムラインのスタイル */
+.timeline-container {
+    padding: 20px;
+}
+
+/* 浮動ボタン */
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #ff6347; /* トマト色 */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 36px;
+    text-decoration: none; /* 下線を消す */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.floating-button:hover {
+    background-color: #ff4500; /* ホバー時の色変更 */
+}
+
+.option{
+
+    font-size: 1rem;
+    text-align: right;
+    width:90%;
+}
 </style>
+
+    <div>
+        <div class="option">
+            {% if obj.owner.id == user.id %}
+            <a href="{% url 'eventEdit' id%}">EDIT</a>  |  <a href="{% url 'eventDelete' id%}">DELETE</a>
+            {% endif %}
+        </div>
         
-    <div >
-        <h2 class="info-event-name">{{obj.name}}<br><div>( {{obj.start_date}} - {{obj.end_date}} )<div></h2>
+        <h2 class="info-event-name"><strong>{{obj.name}}</strong><br><div>( {{obj.start_date |date:"Y年m月d日 H:i"}} - {{obj.end_date |date:"Y年m月d日 H:i"}} )<div></h2>
     </div>
-        
+
         
         <div class="container">
             <!-- 左側のGoogleマップ -->
@@ -37,10 +73,11 @@
             <!-- 右側のタイムライン -->
             <div class="timeline-container">
                 <h2>タイムライン</h2>
-                <div class="timeline-item">
-                    <h3>{{ obj.name }} ( {{ obj.start_date }} - {{ obj.end_date }} )</h3>
-                    <p class="page-details">{{ obj.details }}</p>
-                </div>
+
+                    <div class="timeline-item">
+                        <h3>{{ obj.name }}</h3>
+                        <p class="page-details">{{ obj.details }}</p>
+                    </div>
 
                 {% for store in stores %}
                 <!--ここからデバッグ
@@ -62,10 +99,14 @@
                 {% empty %}
                 <p>No posts available.</p>
                 {% endfor %}
+
+                <a href="{% url 'tweetPost' obj.id %}" class="floating-button" id="post-button">
+                    +
+                </a>
             </div>
     
             <!-- Google Maps JavaScript APIのスクリプトを読み込み -->
-            <script src="https://maps.googleapis.com/maps/api/js?key=ANY&callback=initMap" async defer></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyOUX3jxVjA3FTnoX8RyWuKcg25AFGRV0&callback=initMap" async defer></script>
 
         <script>
             // 地図を初期化する関数
@@ -100,6 +141,7 @@
             });
             }
         </script>
+
 
         <!--以下デバッグデータ
         <ul>

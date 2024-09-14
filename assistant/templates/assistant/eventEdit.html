@@ -1,16 +1,162 @@
 {% extends 'assistant/base.html' %}
 
 {% block content %}
-<h1>{{title}}</h1>
-<p>{{message|safe}}</p>
+<style>
+    /* フォームを中央に配置するためのコンテナ */
+    .form-container {
+        display: flex;
+        justify-content: center; /* 横方向の中央揃え */
+        align-items: center; /* 縦方向の中央揃え */
+        min-height: 50vh; /* 画面全体に縦方向の余白を確保 */
+        padding: 20px;
+    }
+    
+    /* フォーム自体のデザイン */
+    .festival-form {
+        background: #fff; /* 背景色を白に設定 */
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* モダンなシャドウ効果 */
+        max-width: 500px; /* フォームの最大幅を指定 */
+        width: 100%; /* 横幅は100%にしてレスポンシブ対応 */
+        border: 2px solid #ffa07a; /* お祭りっぽいオレンジ色のボーダー */
+        display: flex;
+        flex-direction: column; /* 入力フィールドを縦に並べる */
+        gap: 20px; /* 入力フィールド間の余白 */
+    }
+    
+    /* 各フィールドとラベルのデザイン */
+    .form-group {
+        display: flex;
+        flex-direction: column; /* ラベルと入力欄を縦に並べる */
+        width: 100%;
+    }
+    
+    .form-label {
+        font-weight: bold;
+        color: #ff4500; /* お祭りをイメージした色 */
+        margin-bottom: 0.5rem;
+    }
+    
+    /* 入力欄 */
+    textarea.form-control,
+    input.form-control {
+        background-color: #fff8dc; /* 薄い黄色 */
+        border: 2px solid #ff6347; /* トマト色のボーダー */
+        border-radius: 15px; /* 角を丸くする */
+        padding: 10px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box; /* ボックスモデルをボーダー込みに設定 */
+        transition: border-color 0.3s ease;
+    }
+    
+    /* フォーカス時のスタイル */
+    input.form-control:focus,
+    textarea.form-control:focus {
+        border-color: #ffa07a; /* フォーカス時の色 */
+        box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
+        outline: none;
+    }
+    
+    /* エラー表示 */
+    .alert-danger {
+        background-color: #ffcccb; /* 薄い赤色 */
+        color: #c00; /* エラー色 */
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    
+    /* ボタンのデザイン */
+    .btn-festival {
+        background-color: #ff6347; /* トマト色 */
+        color: white;
+        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 10px;
+        border: none;
+        transition: background-color 0.3s ease;
+        width: 100%; /* ボタンの幅も100%に */
+    }
+    
+    .btn-festival:hover {
+        background-color: #ff4500; /* ホバー時の色変更 */
+    }
+    
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+        .festival-form {
+            padding: 20px;
+        }
+    
+        input.form-control,
+        textarea.form-control {
+            font-size: 14px;
+            padding: 8px;
+        }
+    
+        .btn-festival {
+            font-size: 16px;
+            padding: 8px 16px;
+        }
+    }
+</style>
 
-<form action="{% url 'eventEdit' id%}" method="post">
+<div class="form-container">
+    <form method="POST" action="{% url 'eventEdit' id%}" class="festival-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_name" class="form-label">Event Name</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="alert alert-danger">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
 
-    {% csrf_token %}
-                
-    {{form.as_p}}
-    <input type="submit" value="register" class="btn btn-primary">
+        <div class="form-group">
+            <label for="id_location" class="form-label">Location</label>
+            {{ form.location }}
+            {% if form.location.errors %}
+                <div class="alert alert-danger">{{ form.location.errors }}</div>
+            {% endif %}
+        </div>
 
-</form>
+        <div class="form-group">
+            <label for="id_start_date" class="form-label">Start Date</label>
+            {{ form.start_date  }}
+            {% if form.start_date.errors %}
+                <div class="alert alert-danger">{{ form.start_date.errors }}</div>
+            {% endif %}
+        </div>
 
+        <div class="form-group">
+            <label for="id_end_date" class="form-label">End Date</label>
+            {{ form.end_date }}
+            {% if form.end_date.errors %}
+                <div class="alert alert-danger">{{ form.end_date.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="id_summary" class="form-label">Summary</label>
+            {{ form.summary }}
+            {% if form.summary.errors %}
+                <div class="alert alert-danger">{{ form.summary.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="id_details" class="form-label">Details</label>
+            {{ form.details }}
+            {% if form.details.errors %}
+                <div class="alert alert-danger">{{ form.details.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn-festival">Submit</button>
+    </form>
+</div>
 {% endblock %}

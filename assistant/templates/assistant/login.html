@@ -1,0 +1,122 @@
+{% extends 'assistant/base.html' %}
+
+{% block content %}
+<link rel="icon" href="data:,">
+<style>
+
+    /* フォーム内の要素 */
+    .form-container form {
+        display: flex;
+        flex-direction: column; /* 縦方向に要素を配置 */
+        align-items: center; /* 中央揃え */
+    }
+
+    .form-container {
+        background: linear-gradient(to right, #ff9a9e, #fad0c4); /* きれいなグラデーション背景 */
+        border-radius: 15px;
+        padding: 20px;
+        max-width: 600px;
+        margin: 30px auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* フォームのラベル */
+    .form-container label {
+        font-size: 1.2rem;
+        color: #444; /* 濃いグレーに変更 */
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    /* 入力欄 */
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="password"],
+    .form-container input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+        margin-bottom: 15px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        color: #333; /* 入力欄の文字色を変更 */
+    }
+
+    /* ボタンのスタイル */
+    .form-container button {
+        background-color: #ff6347; /* トマト色 */
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .form-container button:hover {
+        background-color: #e53e3e; /* ホバー時の色変更 */
+    }
+
+    /* エラーメッセージ */
+    .form-container .errorlist {
+        color: #e53e3e; /* エラー色 */
+        margin-bottom: 15px;
+    }
+
+    /* ヘッダー */
+    .form-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-header h2 {
+        font-size: 2rem;
+        color: #ff6347; /* トマト色 */
+        margin-bottom: 10px;
+    }
+
+    /* 説明文 */
+    .form-container .description {
+        font-size: 1rem;
+        color: #555; /* グレーに変更 */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+/* 新規登録リンク */
+.form-container .register-link{
+
+    text-align: center;
+}
+
+.form-container .register-link div{
+
+    text-decoration: underline; /* 下線を追加 */
+}
+
+    .form-container .register-link a:hover {
+        color: #e53e3e; /* ホバー時の色変更 */
+    }
+
+</style>
+
+<div class="form-container">
+    <div class="form-header">
+        <h2>ユーザログイン</h2>
+    </div>
+    <div class="description">
+        <p>ログインして機能をアンロック！</p>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">ログイン</button>
+    </form>
+    <div class="register-link">
+        <a href="{% url 'userRegister' %}">まだアカウントを持っていませんか？  <div>新規登録</div></a>
+    </div>
+</div>
+
+{% endblock %}

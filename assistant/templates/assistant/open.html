@@ -80,7 +80,7 @@
         </div>
     {% endfor %}
 
-    <button type="submit" class="btn-modern">検索</button>
+    <button type="submit" class="btn-modern">絞り込む</button>
 </form>
 
 <div>
@@ -93,9 +93,9 @@
             <h3>{{ event.name }}</h3>
             <p class="event-date">
                 {% if event.start_date == event.end_date %}
-                    開催日: {{ event.start_date }}
+                    開催日: {{ event.start_date|date:"Y年m月d日 H:i" }}
                 {% else %}
-                    開催日: {{ event.start_date }} - {{ event.end_date }}
+                    開催日: {{ event.start_date|date:"Y年m月d日 H:i" }} - {{ event.end_date|date:"Y年m月d日 H:i" }}
                 {% endif %}
             </p>
             <p>場所: {{ event.location }}</p>

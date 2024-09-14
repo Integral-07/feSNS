@@ -101,6 +101,7 @@ h1:before {
 }
 
 .info-event-name {
+    
     position: relative;
     padding: 1.5rem 1.5rem calc(1.5rem + 10px);
     border: 2px solid #000;
@@ -130,6 +131,7 @@ h1:before {
 
     font-size:2rem;
 }
+
 
 .info-event-name::after{
 
@@ -194,6 +196,7 @@ h1:before {
     background-color: #f4f4f4;
     border: 5px solid #ffffff; /* 線の太さと色（例: 黒） */
     overflow-y: auto; /* 縦方向のスクロールバーを追加 */
+    
 }
 
 .timeline-container-wide {
@@ -201,6 +204,15 @@ h1:before {
     padding: 20px;
     background-color: #f4f4f4;
     overflow-y: auto; /* 縦方向のスクロールバーを追加 */
+
+}
+
+.timeline-container-wide-internal{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* 2列の設定 */
+    grid-gap: 20px; /* 各項目間の余白 */
+    margin: 0 auto; /* 中央寄せ */
 }
 
 /* タイムラインの項目 */
@@ -210,6 +222,7 @@ h1:before {
     margin: 10px 0;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
 /* 投稿者名 */
@@ -240,9 +253,6 @@ h1:before {
     word-wrap: break-word;  /* 長い単語がある場合でも端で折り返す */
     width: 100%;
 }
-
-
-
 
 .events-list {
     width: 30%;
@@ -367,6 +377,20 @@ h1:before {
 .event-link:hover {
     background-color: #ff6347;
     color: white;
+}
+
+/* いいねアイコンとカウント */
+.like-icon {
+    font-size: 1.5rem;
+    color: #ff6347;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.like-count {
+    font-size: 1rem;
+    color: #ff6347;
+    vertical-align: middle;
 }
 
 footer{

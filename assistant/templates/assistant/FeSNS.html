@@ -2,6 +2,32 @@
 
 {% block content %}
 
+<style>
+    /* 浮動ボタン */
+    .floating-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background-color: #ff6347; /* トマト色 */
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        font-size: 36px;
+        text-decoration: none; /* 下線を消す */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    .floating-button:hover {
+        background-color: #ff4500; /* ホバー時の色変更 */
+    }   
+</style>
+
     <div class="container">
 
         <div class="events-list">
@@ -14,13 +40,13 @@
                     </a><br>
 
                     {% if event.start_date == event.end_date %}
-                        開催日: {{ event.start_date }} - {{ event.end_date }}
+                        開催日: {{ event.start_date |date:"Y年m月d日 H:i" }} - {{ event.end_date |date:"Y年m月d日 H:i" }}
                     {% else %}
-                        開催日: {{ event.start_date }}
+                        開催日: {{ event.start_date |date:"Y年m月d日 H:i" }}
                     {% endif %}
                 </li>
                 {% empty %}
-                <li>現在、開催中のイベントはありません。</li>
+                    <li>現在、開催中のイベントはありません。</li>
                 {% endfor %}
             </ul>
         </div>
@@ -28,16 +54,24 @@
         <div class="timeline-container-wide timeline">
             <h2>タイムライン</h2>
 
-            <!-- タイムラインの投稿リスト -->
-            {% for tweet in tweets %}
-            <div class="tweet timeline-item">
-                <h3>{{ tweet.user }} - {{ tweet.event.name }}</h3>
-                <div class="date">{{ tweet.pub_day|date:"Y年m月d日 H:i" }}</div>
-                <p class="page-details">{{ tweet.msg }}</p>
+            <div class="timeline-container-wide-internal">
+
+                <!-- タイムラインの投稿リスト -->
+                {% for tweet in tweets %}
+                <div class="tweet timeline-item">
+                    <h3>{{ tweet.user }} - {{ tweet.event.name }}</h3>
+                    <div class="date">{{ tweet.pub_day|date:"Y年m月d日 H:i" }}</div>
+                    <p class="page-details">{{ tweet.msg }}</p>
+                    <span class="like-icon"><a href="{% url 'Like' tweet_id=tweet.id %}" >❤️</a></span>
+                    <span class="like-count">{{ tweet.good_count }}</span>
+                </div>
+                {% empty %}
+                    <p>ポストはまだありません！</p>
+                {% endfor %}
             </div>
-            {% empty %}
-            <p>No posts available.</p>
-            {% endfor %}
         </div>
+        <a href="{% url 'tweetPostUnknownEvent' %}" class="floating-button" id="post-button">
+            +
+        </a>
     </div>
 {% endblock %}

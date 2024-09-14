@@ -55,6 +55,7 @@
     padding: 10px;
     border-radius: 5px;
 }
+
 </style>
 
 <div class="festival-form-container">
@@ -62,12 +63,19 @@
         {% csrf_token %}
         <h2>イベントに関する投稿</h2>
 
-        {{ form.msg.label_tag }}  <!-- ラベル -->
+        {{ form.event }}
+
         {{ form.msg }}  <!-- テキストエリア -->
 
         {% if form.msg.errors %}
         <div class="alert-danger">
             {{ form.msg.errors }}
+        </div>
+        {% endif %}
+
+        {% if form.event.errors %}
+        <div class="alert-danger">
+            {{ form.event.errors }}
         </div>
         {% endif %}
 

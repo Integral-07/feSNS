@@ -8,8 +8,16 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="icon" href="data:,">
 
+        
         <title>{{title}}</title>
 
+        <style>
+
+            body{
+                background-color: #fff5e6; /* 暖かい背景色 */
+            }
+            
+        </style>
     </head>
 
     <body>
@@ -20,10 +28,10 @@
                 <nav class="nav">
                     <ul class="item">
                         <li class="list">
-                            <a href="">ABOUT</a>
+                            <a href="/assistant/open/">SEARCH</a>
                         </li>
                         <li class="list">
-                            <a href="/assistant/open/">SEARCH</a>
+                            <a href="/assistant/register_event/">REGISTER</a>
                         </li>
                         <li class="list logo">
                             <a href="/assistant/home/"><img src="{% static 'assistant/assets/img/logo.png' %}" alt="logo"></a>
@@ -32,7 +40,7 @@
                             <a href="/assistant/FeSNS/home/">FeSNS</a>
                         </li>
                         <li class="list">
-                            <a href="">CONTACT</a>
+                            <a href="">MiniGAME</a>
                         </li>
                     </ul>
                 </nav>
@@ -40,7 +48,9 @@
         </header>
         
         <main>
-            <h1>{{title}}</h1>
+            {% if title %}
+                <h1>{{title}}</h1> 
+            {% endif %}
             {% block content %}
             <!-- 各ページのコンテンツ -->
             {% endblock %}

@@ -2,8 +2,8 @@
 
 {% block content %}
 <style>
-    /* フォームを中央に配置するためのコンテナ */
-    .form-container {
+/* フォームを中央に配置するためのコンテナ */
+.form-container {
         display: flex;
         justify-content: center; /* 横方向の中央揃え */
         align-items: center; /* 縦方向の中央揃え */
@@ -52,8 +52,7 @@
     }
     
     /* フォーカス時のスタイル */
-    input.form-control:focus,
-    textarea.form-control:focus {
+    input.form-control:focus {
         border-color: #ffa07a; /* フォーカス時の色 */
         box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
         outline: none;
@@ -82,8 +81,7 @@
     }
     
     .btn-festival:hover {
-        background-color: #000000; /* ホバー時の色変更 */
-        color: rgb(255, 0, 0);
+        background-color: #ff4500; /* ホバー時の色変更 */
     }
     
     /* レスポンシブ対応 */
@@ -92,8 +90,7 @@
             padding: 20px;
         }
     
-        input.form-control,
-        textarea.form-control {
+        input.form-control {
             font-size: 14px;
             padding: 8px;
         }
@@ -103,43 +100,49 @@
             padding: 8px 16px;
         }
     }
+
+.login-link{
+
+    text-align: center;
+    text-decoration: underline; /* 下線を追加 */
+}
+
 </style>
 
 <div class="form-container">
-    <form method="POST" action="{% url 'eventDelete' id%}" class="festival-form">
+    <form method="POST" action="{% url 'userRegister' %}" class="festival-form">
         {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_username" class="form-label">Username</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="alert alert-danger">{{ form.username.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="id_password1" class="form-label">Password</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                <div class="alert alert-danger">{{ form.password1.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="id_password2" class="form-label">Confirm Password</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <div class="alert alert-danger">{{ form.password2.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-festival">登録</button>
         
-        <div class="form-group">
-            <label for="id_name" class="form-label">Event Name</label>
-            {{ obj.name }}
+        
+        <div class="login-link">
+            <a href="{% url 'login' %}">ログインへ</a>
         </div>
-
-        <div class="form-group">
-            <label for="id_location" class="form-label">Location</label>
-            {{ obj.location }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_start_date" class="form-label">Start Date</label>
-            {{ obj.start_date |date:"Y年m月d日 H:i" }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_end_date" class="form-label">End Date</label>
-            {{ obj.end_date |date:"Y年m月d日 H:i" }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_summary" class="form-label">Summary</label>
-            {{ obj.summary }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_details" class="form-label">Details</label>
-            {{ obj.details }}
-        </div>
-
-        <button type="submit" class="btn-festival">上記の内容のイベント情報を削除</button>
     </form>
 </div>
 {% endblock %}
