@@ -1,26 +1,21 @@
 from django.db import models
-
-class User(models.Model):
-
-    name = models.CharField(max_length=10)
-    mail = models.EmailField(max_length=200)
-    
-
-    def __str__(self):
-
-        return '<User : id = ' + str(self.id) + ', ' + self.name + '[ ' + self.mail + ' ]>'
+from django.contrib.auth.models import User
 
 class Event(models.Model):
 
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=200)
-    date = models.DateField(max_length=100)
+    start_date = models.DateTimeField(max_length=100)
+    end_date = models.DateTimeField(max_length=100)
     summary = models.CharField(max_length=2000)
     details = models.TextField(max_length=5000)
+    owner = models.ForeignKey(User, related_name='events', on_delete=models.CASCADE)
 
     def __str__(self):
 
-        return '<Event : id = ' + str(self.id) + ', ' + self.name + '( ' + self.location + ' : ' + str(self.date) + ' )  | ' + self.summary + '| ' + self.details +  '>'
+        return '<Event : id = ' + str(self.id) + ', ' + self.name + '( ' + self.location + \
+              ' : ' + str(self.start_date) + ' - ' + str(self.end_date) + ' )  | ' \
+                + self.summary + '| ' + self.details + ' by ' + str(self.owner) +'>'
     
 class Store(models.Model):
 

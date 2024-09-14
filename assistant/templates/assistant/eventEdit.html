@@ -1,22 +1,16 @@
-<!DOCTYPE html>
+{% extends 'assistant/base.html' %}
 
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
-        <title>{{title}}</title>
-    </head>
+{% block content %}
+<h1>{{title}}</h1>
+<p>{{message|safe}}</p>
 
-    <body class="container">
-        <h1>{{title}}</h1>
-        <p>{{message|safe}}</p>
+<form action="{% url 'eventEdit' id%}" method="post">
 
-        <form action="{% url 'eventEdit' id%}" method="post">
-
-            {% csrf_token %}
+    {% csrf_token %}
                 
-            {{form.as_p}}
-            <input type="submit" value="register" class="btn btn-primary">
+    {{form.as_p}}
+    <input type="submit" value="register" class="btn btn-primary">
 
-        </form>
-    </body>
+</form>
 
-</html>
+{% endblock %}

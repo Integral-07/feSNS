@@ -1,43 +1,112 @@
-<!DOCTYPE html>
+{% extends 'assistant/base.html' %}
 
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
-        <title>{{title}}</title>
-    </head>
+{% block content %}
+{% load static %}
+<style>
+.form-modern {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    background-color: #f7f9fc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width:80%;
+    margin:0 auto; 
+}
 
-    <body>
-        <h1>{{title}}</h1>
+/* 各フォームフィールドのデザイン */
+.form-group-modern {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 10px;
+}
 
-        <p>{{msg}}</p>
+/* インプットフィールドのデザイン */
+.form-control-modern {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-        <form action="{% url 'open' %}" method="post">
-            {% csrf_token %}
-            {{search_form}}
-            <input type="submit", value="search">
-        </form>
+.form-control-modern:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
 
-        <hr>
+/* ボタンのデザイン */
+.btn-modern {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-        <table class="table">
-        <tr>
-            <th>name</th>
-            <th>location</th>
-            <th>date</th>
-            <th>summary</th>
-        </tr>
+.btn-modern:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
 
-        {% for item in data %}
-            <tr>
-                <th>{{item.name}}</th>
-                <th>{{item.location}}</th>
-                <th>{{item.date}}</th>
-                <th>{{item.summary}}</th>
-                <td><a href="{% url 'eventEdit' item.id %}">Edit</td>
-                <td><a href="{% url 'eventDelete' item.id %}">Delete</td>
-            </tr>
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .form-modern {
+        flex-direction: column;
+    }
 
+    .form-group-modern {
+        width: 100%;
+    }
+}
+</style>
+
+<form method="post" action="{% url 'open' %}" class="form-modern">
+
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div class="form-group-modern">
+            {{ field.label_tag }} {{ field }}
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="btn-modern">検索</button>
+</form>
+
+<div>
+    <div class="event-card-container">
+    {% for event in data %}
+        <a href="{% url 'eventInfo' event.id %}">
+
+            <div class="event-card">
+                <img src="{% static 'assistant/assets/img/logo.png' %}" alt="{{ event.name }}">
+            <h3>{{ event.name }}</h3>
+            <p class="event-date">
+                {% if event.start_date == event.end_date %}
+                    開催日: {{ event.start_date }}
+                {% else %}
+                    開催日: {{ event.start_date }} - {{ event.end_date }}
+                {% endif %}
+            </p>
+            <p>場所: {{ event.location }}</p>
+            <p>概要: {{ event.summary|truncatewords:15 }}</p>
+            <a href="{% url 'eventInfo' event.id %}" class="event-link">詳細を見る</a>
+        </div>
+        {% empty %}
+        <p>現在、開催中のイベントはありません。</p>
         {% endfor %}
-        </table>
-    </body>
+    </a>
+    </div>
+</div>
 
-</html>
+{% endblock %}

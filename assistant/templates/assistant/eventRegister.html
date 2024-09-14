@@ -1,22 +1,84 @@
-<!DOCTYPE html>
+{% extends 'assistant/base.html' %}
+        
+{% block content %}
 
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
-        <title>{{title}}</title>
-    </head>
+<style>
+.modern-form {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom:20px;
+}
 
-    <body class="container">
-        <h1>{{title}}</h1>
-        <p>{{message|safe}}</p>
+.modern-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
 
-        <form action="{% url 'eventRegister' %}" method="post">
+.modern-form label {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+    display: block;
+}
 
-            {% csrf_token %}
+.modern-form input[type="text"],
+.modern-form input[type="email"],
+.modern-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease;
+}
+
+.modern-form input[type="text"]:focus,
+.modern-form input[type="email"]:focus,
+.modern-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.modern-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modern-form button:hover {
+    background-color: #0056b3;
+}
+
+.center{
+
+    text-align: center;
+}
+</style>
+
+<p class="center">{{message|safe}}</p>
+
+<form class="modern-form" action="{% url 'eventRegister' %}" method="post">
+
+    {% csrf_token %}
                 
-            {{form.as_p}}
-            <input type="submit" value="register" class="btn btn-primary">
+    {{form.as_p}}
+    <input type="submit" value="register" class="btn btn-primary">
 
-        </form>
-    </body>
+</form>
 
-</html>
+{% endblock %}

@@ -9,6 +9,6 @@ urlpatterns = [
     path('delete_event/<int:id>/', views.deleteEvent, name="eventDelete"),
     path('edit_event/<int:id>/', views.editEvent, name="eventEdit"),
     path('info_event/<int:id>/', views.eventInfo, name="eventInfo"),
-    path('post_tweet/<int:user_id>/<int:event_id>/', views.tweetPost, name="tweetPost"),
+    path('post_tweet/<int:event_id>/', views.tweetPost, name="tweetPost"),
     path('FeSNS/home/', views.fesnsHome, name="FeSNS"),
 ]

@@ -1,11 +1,43 @@
-<!DOCTYPE html>
+{% extends 'assistant/base.html' %}
 
-<head>
-    <link rel="icon" href="data:,">
-</head>
+{% block content %}
 
-<body>
+    <div class="container">
 
-    {{ title }}
-</body>
-</html>
+        <div class="events-list">
+            <h2>開催中のイベント</h2>
+            <ul>
+                {% for event in events %}
+                <li>
+                    <a href="{% url 'eventInfo' event.id %}">
+                        {{ event.name }}
+                    </a><br>
+
+                    {% if event.start_date == event.end_date %}
+                        開催日: {{ event.start_date }} - {{ event.end_date }}
+                    {% else %}
+                        開催日: {{ event.start_date }}
+                    {% endif %}
+                </li>
+                {% empty %}
+                <li>現在、開催中のイベントはありません。</li>
+                {% endfor %}
+            </ul>
+        </div>
+    
+        <div class="timeline-container-wide timeline">
+            <h2>タイムライン</h2>
+
+            <!-- タイムラインの投稿リスト -->
+            {% for tweet in tweets %}
+            <div class="tweet timeline-item">
+                <h3>{{ tweet.user }} - {{ tweet.event.name }}</h3>
+                <div class="date">{{ tweet.pub_day|date:"Y年m月d日 H:i" }}</div>
+                <p class="page-details">{{ tweet.msg }}</p>
+            </div>
+            {% empty %}
+            <p>No posts available.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -46,6 +46,7 @@ nav.nav{
     
     max-width: 660px;
     margin:0 auto;
+    border-bottom: 3px solid #000;
 }
 
 nav.nav ul.item{
@@ -72,7 +73,7 @@ nav.nav ul.item li.logo{
 nav.nav ul.item li.logo img{
 
     width: 80px;
-    height:30px;
+    height:50px;
     object-fit: contain;
 }
 
@@ -97,6 +98,49 @@ h1:before {
     border-right-color: transparent;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
+}
+
+.info-event-name {
+    position: relative;
+    padding: 1.5rem 1.5rem calc(1.5rem + 10px);
+    border: 2px solid #000;
+    width:80%;
+    margin:0 auto;
+    text-align: center;
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.info-event-name:before {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    content: '';
+    border-top: 2px solid #000;
+    background-image: -webkit-repeating-linear-gradient(135deg, #000, #000 1px, transparent 2px, transparent 5px);
+    background-image: repeating-linear-gradient(-45deg, #000, #000 1px, transparent 2px, transparent 5px);
+    background-size: 7px 7px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.info-event-name div{
+
+    font-size:2rem;
+}
+
+.info-event-name::after{
+
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 8px; /* マーカーの高さ */
+    background-color: #ff6347; /* マーカーの色 (例: トマト色) */
+    z-index: -1; /* マーカーを文字の下に配置 */
 }
 
 .event-name {
@@ -148,6 +192,14 @@ h1:before {
     width: 30%;
     padding: 20px;
     background-color: #f4f4f4;
+    border: 5px solid #ffffff; /* 線の太さと色（例: 黒） */
+    overflow-y: auto; /* 縦方向のスクロールバーを追加 */
+}
+
+.timeline-container-wide {
+    width: 50%;
+    padding: 20px;
+    background-color: #f4f4f4;
     overflow-y: auto; /* 縦方向のスクロールバーを追加 */
 }
 
@@ -189,10 +241,138 @@ h1:before {
     width: 100%;
 }
 
-/* 地図のサイズ */
-#map {
-    height: 100%;  /* コンテナ内でマップを全体に広げる */
-    width: 100%;
+
+
+
+.events-list {
+    width: 30%;
+    background-color: #ff6347; /* 賑やかな赤色 */
+    padding: 20px;
+    overflow-y: auto;
+}
+.events-list h2 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid white;
+}
+.events-list ul {
+    list-style: none;
+    padding: 0;
+}
+.events-list li {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+.events-list li:hover {
+    transform: scale(1.05);
+}
+.events-list li a {
+    text-decoration: none;
+    color: #ff6347;
+    font-weight: bold;
+}
+
+.timeline {
+    width: 70%;
+    padding: 20px;
+    background-color: #f0e68c; /* 柔らかい金色 */
+    overflow-y: auto;
+}
+.timeline h2 {
+    font-size: 24px;
+    color: #ff6347;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #ff6347;
+}
+.timeline .tweet {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+.tweet h3 {
+    margin: 0 0 10px 0;
+    color: #ff6347;
+    font-size: 18px;
+}
+.tweet p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.event-card-container{
+
+    display: flex;
+    max-width: 1200px;
+
+    margin: 0 auto;
+    padding: 20px;
+    flex-wrap: wrap;
+    gap: 20px; /* カード間の隙間を設定 */
+}
+
+.event-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+.event-card:hover {
+    transform: scale(1.05);
+}
+.event-card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+.event-card h3 {
+    font-size: 22px;
+    color: #333;
+    margin: 15px 0;
+}
+.event-card p {
+    color: #666;
+    font-size: 16px;
+    margin: 5px 0;
+}
+.event-date {
+    background-color: #f9a191;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.event-link {
+    display: inline-block;
+    background-color: #f0e68c;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+.event-link:hover {
+    background-color: #ff6347;
+    color: white;
+}
+
+footer{
+
+    background-image: linear-gradient(145deg, #e0c3fc 0%, #8ec5fc 100%);
+    text-align: center;
 }
 
 @media (max-width: 768px) {

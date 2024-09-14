@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<head>
+{% extends 'assistant/base.html' %}
 
-    <link rel="icon" href="data:,">
-</head>
+{% block content %}
 
-<body>
-    {{ title }}
-    <p>{{ msg }}</p>
+    <h1>Tweet</h1>
 
-    <form action="{% url 'tweetPost' user_id=user_data.id event_id=event_data.id %}" method="post">
+    <form action="{% url 'tweetPost' event_id=event_data.id %}" method="post">
 
         {% csrf_token %}
             
@@ -17,6 +13,4 @@
 
     </form>
 
-</body>
-
-</html>
+{% endblock %}

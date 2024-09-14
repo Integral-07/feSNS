@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from .models import Event, User, Tweet
+from .models import Event, Tweet
 from .forms import EventRegisterForm, EventFilterForm, EventForm, TweetForm
 import json
-from django.contrib import messages
+from django.db.models import Q
+from datetime import datetime
+
 
 def index(request):
 
@@ -18,13 +20,43 @@ def index(request):
 
 @login_required(login_url="/admin/login/")
 def open(request):
+    # 初期データとフォームの準備
+    user = request.user
+    form = EventFilterForm(request.GET or None)
+    events = Event.objects.all()
 
-    data = Event.objects.all()
+    # フォームのバリデーションと絞り込み
+    if form.is_valid():
+        name = form.cleaned_data.get('name')
+        location = form.cleaned_data.get('location')
+        start_date = form.cleaned_data.get('start_date')
+        end_date = form.cleaned_data.get('end_date')
+
+        # 名前で部分一致
+        if name:
+            events = events.filter(name__icontains=name)
+
+        # 開催地で部分一致
+        if location:
+            events = events.filter(location__icontains=location)
+
+        # 開催期間で絞り込み
+        if start_date and end_date:
+            events = events.filter(
+                Q(start_date__lte=start_date) & Q(end_date__gte=end_date)
+            )
+        elif start_date:
+            events = events.filter(start_date__gte=start_date)
+        elif end_date:
+            events = events.filter(end_date__lte=end_date)
+
+    # パラメータの準備
     params = {
-
-        'title' : 'Assistant/open',
-        'msg' : 'festival info',
-        'data' : data,
+        'title': '開催中のイベント',
+        'msg': 'festival info',
+        'data': events,
+        'user': user,
+        'form': form,
     }
 
     return render(request, 'assistant/open.html', params)
@@ -36,7 +68,7 @@ def registerEvent(request):
 
     params = {
 
-        'title' : 'Assistant/EventRegister',
+        'title' : 'イベント登録',
         'message' : 'Fill in bellow blanks to register events',
         'form' : EventRegisterForm(),
         'search_form' : EventFilterForm(),
@@ -47,9 +79,7 @@ def registerEvent(request):
         event = EventForm(request.POST, instance=obj)
         event.save()
 
-        params['message'] = 'Registration completed successfully<br>' + request.POST['name'] + '( ' + request.POST['location'] + ' : ' + request.POST['date'] + ')' + request.POST['summary']
-
-        #return redirect(to="open/")
+        return redirect(to="/assistant/open/")
     
     return render(request, 'assistant/eventRegister.html', params)
 
@@ -107,7 +137,7 @@ def eventInfo(request, id):
 
     params = {
 
-        'title': 'Assistant/EventInfo',
+        'title': 'イベント情報',
         'message' : 'event infomation',
         'id' : id,
         'obj' : event,
@@ -120,10 +150,10 @@ def eventInfo(request, id):
 
 
 @login_required(login_url="/admin/login/")
-def tweetPost(request, user_id, event_id):
+def tweetPost(request, event_id):
     
     event = Event.objects.get(id=event_id)
-    user = User.objects.get(id=user_id)
+    user = request.user
 
     params = {
 
@@ -134,7 +164,6 @@ def tweetPost(request, user_id, event_id):
         'form': TweetForm(),
     }
 
-    print("POST request received")
     if(request.method == "POST"):
         obj = Tweet(user=user, event=event, good_count=0)
         tweet = TweetForm(request.POST, instance=obj)
@@ -147,9 +176,13 @@ def tweetPost(request, user_id, event_id):
 
 def fesnsHome(request):
 
+    tweets = Tweet.objects.all()
+    events = Event.objects.all()
     params = {
 
-        'title' : 'Assistant/FeSNS',
+        'title' : 'FeSNS',
+        'tweets' : tweets,
+        'events' : events
     }
 
     return render(request, 'assistant/FeSNS.html', params)
