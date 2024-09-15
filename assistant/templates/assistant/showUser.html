@@ -30,9 +30,4 @@
 
 <p class="name">You signed in as {{ user.username }}</p>
 
-<form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn-submit">Logout</button>
-</form>
-
 {% endblock %}

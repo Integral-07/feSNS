@@ -15,7 +15,6 @@ urlpatterns = [
     path('FeSNS/like/<int:tweet_id>/', views.like_tweet, name="Like"),
     path('register_user/', views.registerUser, name="userRegister"),
     path('login/', views.loginUser, name="login"),
-    path('accounts/', include('django.contrib.auth.urls')),
     path('add_store/<int:event_id>/', views.addStore, name="addStore"),
     path('show_user/', views.showUser, name="showUser"),
 ]
