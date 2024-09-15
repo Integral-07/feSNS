@@ -40,7 +40,12 @@
                             <a href="/assistant/FeSNS/home/">FeSNS</a>
                         </li>
                         <li class="list">
-                            <a href="">MiniGAME</a>
+                            {% if user.is_authenticated %}
+                                <a href="/assistant/show_user/">ACCOUNT</a>
+                            {% else %}
+                                <a href="/assistant/register_user/">ACCOUNT</a>
+                            {% endif %}
+
                         </li>
                     </ul>
                 </nav>

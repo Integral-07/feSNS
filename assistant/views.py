@@ -81,7 +81,7 @@ def registerEvent(request):
     }
     if(request.method == "POST"):
         
-        obj = Event()
+        obj = Event(owner=request.user)
         event = EventForm(request.POST, instance=obj)
         event.save()
 
@@ -283,3 +283,27 @@ def loginUser(request):
     }
 
     return render(request, 'assistant/login.html', params)
+
+@login_required(login_url="/assistant/login/")
+def addStore(request, event_id):
+
+    params = {
+
+        'title': '出店情報',
+        'msg':'<p>This page is under construction. Please check me later.</p>'
+    }
+
+    return render(request, 'assistant/addStore.html', params)
+
+@login_required(login_url="/assistant/login/")
+def showUser(request):
+
+    user = request.user
+
+    params = {
+
+        'title': 'ユーザ情報',
+        'user': user,
+    }
+
+    return render(request, 'assistant/showUser.html', params)

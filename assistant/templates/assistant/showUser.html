@@ -1,0 +1,38 @@
+{% extends 'assistant/base.html' %}
+
+{% block content %}
+
+<style>
+
+    .name{
+
+        text-align: center;
+        margin-bottom: 60px;
+        font-size: 2rem;
+    }
+
+    /* ボタンのデザイン */
+.btn-submit {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #ff4500;
+}
+
+</style>
+
+<p class="name">You signed in as {{ user.username }}</p>
+
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn-submit">Logout</button>
+</form>
+
+{% endblock %}

@@ -125,7 +125,7 @@
 
         <div class="form-group">
             <label for="id_start_date" class="form-label">開催日時</label>
-            {{ form.start_date |date:"Y年m月d日 H:i" }}
+            {{ form.start_date }}
             {% if form.start_date.errors %}
                 <div class="alert-danger">{{ form.start_date.errors }}</div>
             {% endif %}
@@ -133,7 +133,7 @@
 
         <div class="form-group">
             <label for="id_end_date" class="form-label">終了日時</label>
-            {{ form.end_date |date:"Y年m月d日 H:i" }}
+            {{ form.end_date  }}
             {% if form.end_date.errors %}
                 <div class="alert-danger">{{ form.end_date.errors }}</div>
             {% endif %}

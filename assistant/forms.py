@@ -11,7 +11,7 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
-        super(EventForm, self).__init__(*args, **kwargs)
+        super(UserCreationForm, self).__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
                 'class': 'form-control',
@@ -57,14 +57,14 @@ class TweetForm(forms.ModelForm):
             'msg': forms.Textarea(attrs={
                 'rows': 4,
                 'cols': 40,
-                'placeholder': '投稿内容を入力してください',
+                'placeholder': '投稿内容を入力',
                 'class': 'form-control tweet-textarea',  # 追加: カスタムクラスを適用
                 'style': 'border-radius: 10px; border: 2px solid #ff6347;',  # 丸角とボーダー
             }),
         }
 
     def __init__(self, *args, **kwargs):
-        super(EventForm, self).__init__(*args, **kwargs)
+        super(TweetForm, self).__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
                 'class': 'form-control',
@@ -89,7 +89,7 @@ class TweetUnknownEventForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(EventForm, self).__init__(*args, **kwargs)
+        super(TweetUnknownEventForm, self).__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
                 'class': 'form-control',

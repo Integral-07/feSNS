@@ -56,7 +56,7 @@
     <div>
         <div class="option">
             {% if obj.owner.id == user.id %}
-            <a href="{% url 'eventEdit' id%}">EDIT</a>  |  <a href="{% url 'eventDelete' id%}">DELETE</a>
+                <a href="{% url 'addStore' id%}">ADD STORE</a>  |  <a href="{% url 'eventEdit' id%}">EDIT</a>  |  <a href="{% url 'eventDelete' id%}">DELETE</a>
             {% endif %}
         </div>
         

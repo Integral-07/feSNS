@@ -109,7 +109,7 @@
         {% csrf_token %}
         
         <div class="form-group">
-            <label for="id_name" class="form-label">Event Name</label>
+            <label for="id_name" class="form-label">イベント名</label>
             {{ form.name }}
             {% if form.name.errors %}
                 <div class="alert alert-danger">{{ form.name.errors }}</div>
@@ -117,7 +117,7 @@
         </div>
 
         <div class="form-group">
-            <label for="id_location" class="form-label">Location</label>
+            <label for="id_location" class="form-label">開催地</label>
             {{ form.location }}
             {% if form.location.errors %}
                 <div class="alert alert-danger">{{ form.location.errors }}</div>
@@ -125,7 +125,7 @@
         </div>
 
         <div class="form-group">
-            <label for="id_start_date" class="form-label">Start Date</label>
+            <label for="id_start_date" class="form-label">開催日時</label>
             {{ form.start_date  }}
             {% if form.start_date.errors %}
                 <div class="alert alert-danger">{{ form.start_date.errors }}</div>
@@ -133,7 +133,7 @@
         </div>
 
         <div class="form-group">
-            <label for="id_end_date" class="form-label">End Date</label>
+            <label for="id_end_date" class="form-label">終了日時</label>
             {{ form.end_date }}
             {% if form.end_date.errors %}
                 <div class="alert alert-danger">{{ form.end_date.errors }}</div>
@@ -141,7 +141,7 @@
         </div>
 
         <div class="form-group">
-            <label for="id_summary" class="form-label">Summary</label>
+            <label for="id_summary" class="form-label">イベント概要</label>
             {{ form.summary }}
             {% if form.summary.errors %}
                 <div class="alert alert-danger">{{ form.summary.errors }}</div>
@@ -149,14 +149,16 @@
         </div>
 
         <div class="form-group">
-            <label for="id_details" class="form-label">Details</label>
+            <label for="id_details" class="form-label">イベント詳細</label>
             {{ form.details }}
             {% if form.details.errors %}
                 <div class="alert alert-danger">{{ form.details.errors }}</div>
             {% endif %}
         </div>
 
-        <button type="submit" class="btn-festival">Submit</button>
+        
+
+        <button type="submit" class="btn-festival">登録</button>
     </form>
 </div>
 {% endblock %}

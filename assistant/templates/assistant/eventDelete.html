@@ -110,32 +110,32 @@
         {% csrf_token %}
         
         <div class="form-group">
-            <label for="id_name" class="form-label">Event Name</label>
+            <label for="id_name" class="form-label">イベント名</label>
             {{ obj.name }}
         </div>
 
         <div class="form-group">
-            <label for="id_location" class="form-label">Location</label>
+            <label for="id_location" class="form-label">開催地</label>
             {{ obj.location }}
         </div>
 
         <div class="form-group">
-            <label for="id_start_date" class="form-label">Start Date</label>
+            <label for="id_start_date" class="form-label">開催日時</label>
             {{ obj.start_date |date:"Y年m月d日 H:i" }}
         </div>
 
         <div class="form-group">
-            <label for="id_end_date" class="form-label">End Date</label>
+            <label for="id_end_date" class="form-label">終了日時</label>
             {{ obj.end_date |date:"Y年m月d日 H:i" }}
         </div>
 
         <div class="form-group">
-            <label for="id_summary" class="form-label">Summary</label>
+            <label for="id_summary" class="form-label">イベント概要</label>
             {{ obj.summary }}
         </div>
 
         <div class="form-group">
-            <label for="id_details" class="form-label">Details</label>
+            <label for="id_details" class="form-label">イベント詳細</label>
             {{ obj.details }}
         </div>
 

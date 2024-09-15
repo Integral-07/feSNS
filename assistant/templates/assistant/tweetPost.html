@@ -58,12 +58,12 @@
 </style>
 
 <div class="festival-form-container">
-    <form method="POST" class="festival-form">
+    <form method="POST" action="{% url 'tweetPost' event_data.id%}" class="festival-form">
         {% csrf_token %}
-        <h2>イベントに関する投稿</h2>
+        <h2>{{ event_data.name }}に関する投稿</h2>
 
-        {{ form.msg.label_tag }}  <!-- ラベル -->
-        {{ form.msg }}  <!-- テキストエリア -->
+        {{ form.msg.label_tag }} 
+        {{ form.msg }}
 
         {% if form.msg.errors %}
         <div class="alert-danger">

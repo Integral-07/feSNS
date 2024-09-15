@@ -59,25 +59,24 @@
 </style>
 
 <div class="festival-form-container">
-    <form method="POST" class="festival-form">
+    <form method="POST" action="{% url 'tweetPostUnknownEvent' %}" class="festival-form">
         {% csrf_token %}
         <h2>イベントに関する投稿</h2>
 
         {{ form.event }}
+        {% if form.event.errors %}
+        <div class="alert-danger">
+            {{ form.event.errors }}
+        </div>
+        {% endif %}
 
-        {{ form.msg }}  <!-- テキストエリア -->
-
+        {{ form.msg }} 
         {% if form.msg.errors %}
         <div class="alert-danger">
             {{ form.msg.errors }}
         </div>
         {% endif %}
 
-        {% if form.event.errors %}
-        <div class="alert-danger">
-            {{ form.event.errors }}
-        </div>
-        {% endif %}
 
         <button type="submit" class="btn-submit">投稿する</button>
     </form>
