@@ -39,7 +39,7 @@ FeSNS（フェス・エヌ・エス）
 ## フロントエンド(ダミーデータ版)
 - ホーム画面<br>開催されているイベントの概要が一覧できる。２つのダミーイベントが登録されている状態。「詳細を見る」から下の項目に移動する。<br><img src="https://github.com/user-attachments/assets/c951edc7-6a59-4170-b6bc-41533161b358" width="200">
 - イベント詳細情報画面<br>イベントの詳細とGoogleMapで（本来は屋台の位置などをマーカで示せるが、APIの関係で暗転中...）位置を確認できる<br>また、このイベントに対する投稿を一覧できる。（adminから一件の投稿がある状態）<br><img src="https://github.com/user-attachments/assets/b8cf7b19-0ff0-417b-b4ca-03c68e411d54" width="200">
-- SNS画面<br>開催中のイベント名及び日程一覧と、FeSNSのタイムラインが表示される。<br>ハートボタンからその投稿にいいねできる。<br><img src="https://github.com/user-attachments/assets/d4c15bb1-49dc-476c-9f02-d41cd50a4b22" width="200">
+- SNS画面<br>開催中のイベント名及び日程一覧と、FeSNSのタイムラインが表示される。右下の＋ボタンから投稿ができる。<br>ハートボタンからその投稿にいいねできる。<br><img src="https://github.com/user-attachments/assets/d4c15bb1-49dc-476c-9f02-d41cd50a4b22" width="200">
 - イベント登録画面<br>イベント開催側が、イベントの情報を登録できる。<br>屋台などの位置は、緯度経度で指定するのでGUIで登録できるようにしたい<br><img src="https://github.com/user-attachments/assets/6b84842b-d348-4a4a-a9e5-ebb817c8f4dd" width="200">
 - ログイン画面<br><img src="https://github.com/user-attachments/assets/d315eb11-5e46-4e4c-bf68-87bd4dbe9936" width="200">
 
