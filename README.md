@@ -11,12 +11,6 @@ FeSNS（フェス・エヌ・エス）
 ## プロジェクトについて
 
 お祭りなどのイベントにフォーカスしたSNS
-
-  <p align="left">
-    <br />
-    <a href="https://qiita.com/Integral-07/items/be2fdeb59b07168a2c95"><strong>ハッカソン参加録（Qiita記事） »</strong></a>
-    <br />
-    <br />
     
 ### 背景
 １．地方のお祭り（イベント）は周知されにくい<br>
